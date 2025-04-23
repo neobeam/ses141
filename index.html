@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Many Tacos Can the Sun Make?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffbe6;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      color: #d35400;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .highlight {
+      background-color: #f9e79f;
+      padding: 0.5rem;
+      border-left: 4px solid #d35400;
+    }
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+    #result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>☀️ How Many Tacos Can the Sun Make?</h1>
+  <div class="section">
+    <p><strong>Objective:</strong> Estimate how much solar energy hits a given area in Phoenix per day, and how many tacos that could heat.</p>
+  </div>
+
+  <div class="section">
+    <h2>Enter Land Area (in km²):</h2>
+    <input type="number" id="landArea" placeholder="e.g. 1" min="0.1" step="0.1">
+    <br>
+    <button onclick="calculateTacos()">Calculate Tacos</button>
+    <div id="result"></div>
+  </div>
+
+  <div class="section">
+    <h2>How It Works</h2>
+    <p>Phoenix gets about <strong>6 kWh/m²/day</strong> of solar radiation. Each taco takes about <strong>0.014 kWh</strong> to heat.</p>
+    <p>We multiply the land area by the solar energy per square meter, then divide by taco energy to get the total tacos!</p>
+  </div>
+
+  <div class="section">
+    <h2>Formula</h2>
+    <div class="highlight">
+      tacos = (landArea × 1,000,000 × 6) / 0.014
+    </div>
+  </div>
+
+  <footer>
+    Made by YJ Kim for a creative energy project. Hosted on GitHub Pages.
+  </footer>
+
+  <script>
+    function calculateTacos() {
+      const landArea = parseFloat(document.getElementById('landArea').value);
+      if (isNaN(landArea) || landArea <= 0) {
+        document.getElementById('result').innerText = 'Please enter a valid land area in km².';
+        return;
+      }
+      const tacoEnergy = 0.014; // kWh per taco
+      const solarPerM2 = 6; // kWh/m²/day
+      const totalEnergy = landArea * 1_000_000 * solarPerM2;
+      const tacos = Math.floor(totalEnergy / tacoEnergy).toLocaleString();
+      document.getElementById('result').innerText = `☀️ With ${landArea} km² of land in Phoenix, you could heat about ${tacos} tacos per day! 🌮`;
+    }
+  </script>
+</body>
+</html>
